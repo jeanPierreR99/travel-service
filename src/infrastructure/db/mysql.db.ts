@@ -4,11 +4,11 @@ import { Category, Provider, Quotation, Service, User } from "../../domain";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
-  host: process.env.DB_HOST,
+  host: process.env.MYSQLDB_HOST,
   port: Number(process.env.DB_PORT),
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  username: process.env.MYSQLDB_USER,
+  password: process.env.MYSQLDB_PASSWORD,
+  database: process.env.MYSQLDB_DATABASE,
   entities: [User, Quotation, Provider, Category, Service],
   synchronize: true,
 });

@@ -9,7 +9,7 @@ async function startServer() {
   try {
     await AppDataSource.initialize();
 
-    const port = parseFloat(process.env.PORT as string);
+    const port = parseFloat(process.env.NODE_LOCAL_PORT as string);
     const routes = IndexRoutes.routes;
 
     new IndexServer({ port, routes }).start();
