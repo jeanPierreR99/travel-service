@@ -18,7 +18,7 @@ function startServer() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mysql_db_1.AppDataSource.initialize();
-            const port = parseFloat(process.env.PORT);
+            const port = parseFloat(process.env.NODE_LOCAL_PORT);
             const routes = presentation_1.IndexRoutes.routes;
             new presentation_1.IndexServer({ port, routes }).start();
         }

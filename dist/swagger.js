@@ -17,7 +17,7 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: `http://localhost:${process.env.PORT}`,
+                url: `http://localhost:${process.env.NODE_LOCAL_PORT}`,
             },
         ],
         components: {
