@@ -1,9 +1,4 @@
-import {
-  CreateQuotationUSDto,
-  Quotation,
-  Service,
-  User,
-} from "../../domain";
+import { CreateQuotationUSDto, Quotation, Service, User } from "../../domain";
 
 export interface QuotationInterface {
   get(): Promise<Quotation[]>;
@@ -12,4 +7,5 @@ export interface QuotationInterface {
   getById(data: number): Promise<Quotation | null>;
   findServices(data: number[]): Promise<Service[] | null>;
   findUser(data: number): Promise<User | null>;
+  delete(data: number): Promise<void>;
 }

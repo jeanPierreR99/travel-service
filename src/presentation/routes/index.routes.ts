@@ -14,6 +14,9 @@ export class IndexRoutes {
     router.use("/quotation", QuotationRoutes.routes);
     router.use("/user", UserRoutes.routes);
 
+    router.all("*", (req, res) => {
+      res.status(404).json({ message: "path not found" });
+    });
     return router;
   }
 }

@@ -66,6 +66,26 @@ export class QuotationController {
     }
   }
 
+  async delete(req: Request, res: Response): Promise<void> {
+    try {
+      const data = req.params.id;
+      if (!data) {
+        res.status(401).json({ message: "id no proveído" });
+        return;
+      }
+      await this.cases.delete(parseInt(data));
+
+      res.status(200).json({ message: "delete successfull" });
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        res.status(404).json({ message: error.message });
+        return;
+      }
+      console.log(error);
+      res.status(500).json({ message: error });
+    }
+  }
+
   async generatePdf(req: Request, res: Response): Promise<void> {
     try {
       const id = req.params.id;

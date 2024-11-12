@@ -1,7 +1,9 @@
 services:
   mysqldb:
     image: mysql
+    restart: unless-stopped
     env_file: ./.env
+    container_name: $CONTAINER_NAME_DB
     environment:
       - MYSQL_USER=$MYSQLDB_USER
       - MYSQL_PASSWORD=$MYSQLDB_PASSWORD
@@ -9,12 +11,16 @@ services:
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - mysql_data:/var/lib/mysql
 
   app:
     depends_on:
       - mysqldb
     build: .
+    restart: unless-stopped
     env_file: ./.env
+    container_name: $CONTAINER_NAME_APP
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     environment:
@@ -23,6 +29,10 @@ services:
       - DB_PASSWORD=$MYSQLDB_PASSWORD
       - DB_NAME=$MYSQLDB_DATABASE
       - DB_PORT=$MYSQLDB_DOCKER_PORT
+    stdin_open: true
+    tty: true
+
     volumes:
       - .:/myapp
-    # command: sh -c "node dist/index.js"
+volumes:
+  mysql_data:

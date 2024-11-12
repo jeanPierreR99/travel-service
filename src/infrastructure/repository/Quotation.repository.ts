@@ -1,11 +1,6 @@
 import { In, Repository } from "typeorm";
 import { AppDataSource, QuotationInterface } from "..";
-import {
-  CreateQuotationUSDto,
-  Quotation,
-  Service,
-  User,
-} from "../../domain";
+import { CreateQuotationUSDto, Quotation, Service, User } from "../../domain";
 
 export class QuotationRepository implements QuotationInterface {
   constructor(private repository: Repository<Quotation>) {
@@ -49,5 +44,9 @@ export class QuotationRepository implements QuotationInterface {
     });
 
     return found || null;
+  }
+
+  async delete(data: number): Promise<void> {
+    await this.repository.delete(data);
   }
 }

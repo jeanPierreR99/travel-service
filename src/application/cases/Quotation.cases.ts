@@ -42,9 +42,15 @@ export class QuotationCases {
     return await this.impInterface.update(foundQuotation);
   }
 
+  async delete(data: number): Promise<void> {
+    const foundQuotation = await this.impInterface.getById(data);
+    if (!foundQuotation) throw new NotFoundException("quotation", `${data}`);
+
+    return await this.impInterface.delete(data);
+  }
+
   async quotationPdf(data: number, res: any): Promise<any> {
     const quotation = await this.impInterface.getById(data);
-    console.log(quotation);
     if (!quotation) throw new NotFoundException("Quotation", data.toString());
 
     const pdfBuffer = await this.pdfService.generatePDF(quotation, res);

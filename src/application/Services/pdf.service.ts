@@ -36,17 +36,15 @@ export class PdfService {
       headers: [
         { label: "Tipo de Servicio", property: "type" },
         { label: "Descripción", property: "description" },
-        { label: "Precio", property: "price" },
-        { label: "Categoría", property: "category" },
         { label: "Proveedor", property: "provider" },
+        { label: "Precio", property: "price" },
         { label: "Total", property: "total" },
       ],
       datas: data.services?.map((item: any) => ({
         type: item.category.name,
         description: item.description,
-        price: `S/. ${item.price.toFixed(2)}`,
-        category: item.category.name,
         provider: item.provider.name,
+        price: `S/. ${item.price.toFixed(2)}`,
         total: `bold:S/. ${item.price.toFixed(2)}`,
       })),
     };

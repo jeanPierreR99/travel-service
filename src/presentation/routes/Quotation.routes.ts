@@ -30,10 +30,9 @@ export class QuotationRoutes {
      *           type: integer
      *           example: 12345678
      *         services:
-     *           type: array
      *           items:
      *             type: integer
-     *             example: [1, 2, 3]
+     *             example: 1
      *
      *     CreateQuotation:
      *       type: object
@@ -55,10 +54,9 @@ export class QuotationRoutes {
      *           type: string
      *           example: reserva
      *         services:
-     *           type: array
      *           items:
      *             type: integer
-     *             example: [1, 2, 3]
+     *             example: 1
      */
 
     /**
@@ -162,6 +160,32 @@ export class QuotationRoutes {
      *         description: Cotización no encontrada.
      */
     router.get("/pdf/:id", (req, res) => controller.generatePdf(req, res));
+
+    /**
+     * @swagger
+     * /api/quotation/{id}:
+     *   delete:
+     *     tags:
+     *       - Cotizaciones
+     *     summary: Eliminar Cotización
+     *     description: Elimina una Cotización con sus relaciones.
+     *     parameters:
+     *       - in: path
+     *         name: id
+     *         required: true
+     *         description: ID de la cotización a eliminar.
+     *         schema:
+     *           type: integer
+     *
+     *     responses:
+     *       200:
+     *         description: Cotización eliminada.
+     *
+     *       404:
+     *         description: Cotización no encontrada.
+     */
+
+    router.delete("/:id", (req, res) => controller.delete(req, res));
 
     return router;
   }
